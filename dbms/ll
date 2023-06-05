@@ -1,0 +1,98 @@
+Candidate Key
+Primary Key
+Super Key
+Alternate Key
+Foreign Key
+Composite Key
+
+Candidate Key: A candidate key is a column or a combination of columns that can uniquely identify each record in a table. It means that no two records can have the same values for the candidate key. A table can have multiple candidate keys, and one of them is chosen as the primary key.
+
+Primary Key: A primary key is a specific candidate key chosen to uniquely identify each record in a table. It is a single column or a combination of columns that uniquely identifies each row. The primary key must be unique and not null, meaning it cannot contain duplicate values or null values.
+
+Super Key: A super key is a set of one or more columns that can uniquely identify records in a table. Unlike a candidate key, a super key may include additional redundant columns that are not strictly necessary for uniqueness. In other words, a super key is a superset of a candidate key.
+
+Alternate Key: An alternate key is a candidate key that is not selected as the primary key. It means that it is an alternative choice for uniquely identifying records in a table. While the primary key is chosen as the main identifier, alternate keys can still have unique and non-null values.
+
+Foreign Key: A foreign key establishes a relationship between two tables. It is a column or a set of columns in one table that refers to the primary key of another table. The foreign key represents a link between the two tables, allowing data to be related and ensuring referential integrity. It helps maintain consistency and enforce relationships between tables.
+
+Composite Key: A composite key, also known as a compound key, is a key that consists of two or more columns. It is used when a single column cannot uniquely identify a record. The combination of columns in the composite key provides the uniqueness required.
+
+NOT NULL: This constraint tells that we cannot store a null value in a column. That is, if a column is specified as NOT NULL then we will not be able to store null in this particular column any more.
+UNIQUE: This constraint when specified with a column, tells that all the values in the column must be unique. That is, the values in any row of a column must not be repeated.
+PRIMARY KEY: A primary key is a field which can uniquely identify each row in a table. And this constraint is used to specify a field in a table as primary key.
+FOREIGN KEY: A Foreign key is a field which can uniquely identify each row in a another table. And this constraint is used to specify a field as Foreign key.
+CHECK: This constraint helps to validate the values of a column to meet a …
+
+Operator	Description
+=	Equal to.
+>	Greater than.
+<	Less than.
+>=	Greater than equal to.
+<=	Less than equal to.
+<>	Not equal to.
+
+In SQL, JOIN operations are used to combine rows from multiple tables based on a related column between them. Here's an explanation of different types of JOIN operations:
+
+INNER JOIN: The INNER JOIN returns only the rows that have matching values in both tables being joined. It selects the records where the join condition is satisfied in both tables. In other words, it returns the intersection of the two tables.
+Example:
+
+SELECT * FROM table1
+INNER JOIN table2
+ON table1.column = table2.column;
+
+LEFT JOIN: The LEFT JOIN returns all the rows from the left table (the table specified before the JOIN keyword) and the matching rows from the right table. If there are no matching rows in the right table, NULL values are returned for the columns of the right table.
+Example:
+
+
+SELECT * FROM table1
+LEFT JOIN table2
+ON table1.column = table2.column;
+
+RIGHT JOIN: The RIGHT JOIN returns all the rows from the right table (the table specified after the JOIN keyword) and the matching rows from the left table. If there are no matching rows in the left table, NULL values are returned for the columns of the left table.
+Example:
+
+
+SELECT * FROM table1
+RIGHT JOIN table2
+ON table1.column = table2.column;
+
+FULL JOIN: The FULL JOIN returns all the rows from both the left and right tables. It combines the result of both the LEFT JOIN and the RIGHT JOIN. If there are no matching rows in either table, NULL values are returned for the columns of the non-matching table.
+Example:
+
+
+SELECT * FROM table1
+FULL JOIN table2
+ON table1.column = table2.column;
+
+NATURAL JOIN: The NATURAL JOIN is a type of JOIN that automatically matches the columns with the same name in both tables. It returns the rows where the values in the matched columns are equal. However, it is generally recommended to use explicit JOIN conditions instead of relying on column names for clarity and avoiding unexpected results.
+Example:
+
+
+SELECT * FROM table1
+NATURAL JOIN table2;
+
+
+List of DDL commands: 
+
+CREATE: This command is used to create the database or its objects (like table, index, function, views, store procedure, and triggers).
+DROP: This command is used to delete objects from the database.
+ALTER: This is used to alter the structure of the database.
+TRUNCATE: This is used to remove all records from a table, including all spaces allocated for the records are removed.
+COMMENT: This is used to add comments to the data dictionary.
+RENAME: This is used to rename an object existing in the database.
+
+
+List of DML commands: 
+
+INSERT: It is used to insert data into a table.
+UPDATE: It is used to update existing data within a table.
+DELETE: It is used to delete records from a database table.
+LOCK: Table control concurrency.
+CALL: Call a PL/SQL or JAVA subprogram.
+EXPLAIN PLAN: It describes the access path to data.
+
+
+DCL includes commands such as GRANT and REVOKE which mainly deal with the rights, permissions, and other controls of the database system. 
+
+
+TCL Commit , Rollback, Savepoint
