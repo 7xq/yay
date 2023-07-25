@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm -f /etc/pacman.d/mirrorlist
+echo "Server = https://mirror.osbeck.com/archlinux/\$repo/os/\$arch" | sudo tee -a /etc/pacman.d/mirrorlist
 # Make sure to boot into the Arch Linux ISO and ensure an internet connection is available.
 pacman -Sy --needed --noconfirm archlinux-keyring
 # Verify that the NVMe partitions are available
@@ -28,9 +30,8 @@ pacstrap /mnt base base-devel linux linux-firmware
 # Generate the fstab file
 genfstab -U /mnt >> /mnt/etc/fstab
 
-# Chroot into the new system
-arch-chroot /mnt
-
+# Chroot into the new system and complete the setup inside the chroot environment
+arch-chroot /mnt /bin/bash - <<EOF
 # Set the time zone (change 'Region' and 'City' to your timezone)
 ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
 
@@ -51,7 +52,7 @@ echo "archlinux" > /etc/hostname
 # Add matching entries to /etc/hosts
 echo "127.0.0.1   localhost" >> /etc/hosts
 echo "::1         localhost" >> /etc/hosts
-echo "127.0.1.1   yourhostname.localdomain  yourhostname" >> /etc/hosts
+echo "127.0.1.1   archlinux.localdomain  archlinux" >> /etc/hosts
 
 # Set the root password
 passwd
@@ -65,20 +66,20 @@ passwd shaquibimdad
 # Allow the new user to execute administrative tasks with sudo
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 
-# Install and configure systemd-boot
+# Install and configure systemd-boot to the new directory
 bootctl --path=/boot_systemd install
 
-# Create a new boot entry for Arch Linux
-cat <<EOF > /boot_systemd/loader/entries/arch.conf
-title   Arch Linux
+# Create a new boot entry for Arch Linux in the new directory
+cat <<EOF > /boot_systemd/loader/entries/archpp.conf
+title   Arch Linux pp
 linux   /vmlinuz-linux
 initrd  /initramfs-linux.img
 options root=PARTUUID=$(blkid -s PARTUUID -o value "$root_partition") rw
 EOF
 
-
-# Update the bootloader
+# Update the bootloader in the new directory
 bootctl --path=/boot_systemd update
+EOF
 
 # Exit chroot
 exit
